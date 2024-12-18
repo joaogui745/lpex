@@ -6,5 +6,13 @@ mencao  n
     | n > 3.0 = "MI" 
     | otherwise = "SR" 
 
---main :: IO()
---main = print (mencao 6.9)
+
+data Mencao = SR | MI | MM | MS | SS deriving Show
+
+mencao2 :: Float -> Mencao
+mencao2 n
+    | n >= 9.0 = SS 
+    | n >= 7.0 = MS  
+    | n >= 5.0 = MM 
+    | n > 3.0 = MI 
+    | otherwise = SR

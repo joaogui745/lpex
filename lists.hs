@@ -70,3 +70,19 @@ isDec xs = and (zipWith (>) xs (tail xs))
 -- Verificar Ascendência usando Fold
 isSorted (x:xs) = fst $ foldl step (True, x) xs
   where step (b, x) y = (b && (x <= y), y)
+
+quickSort [] = []
+quickSort (pivo:ls) = quickSort menores ++ [pivo] ++ quickSort maiores where
+    menores = [men| men <- ls, men < pivo]
+    maiores = [mai | mai <- ls, mai > pivo]
+
+
+mergeSort [] = []
+mergeSort [x] = [x]
+mergeSort ls = merge (mergeSort esquerda) (mergeSort direita) where
+    (esquerda, direita) = splitAt (div (length ls) 2) ls
+    merge (x:xs) (y:ys)
+        | x <= y = x : merge xs (y:ys)
+        | otherwise = y : merge (x:xs) ys
+    merge [x] ys = ys
+    merge xs [] = xs
